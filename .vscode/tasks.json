@@ -12,7 +12,7 @@
 				"-I${workspaceFolder}/Dependencies/include",
 				"-L${workspaceFolder}/Dependencies/lib",
 				"${workspaceFolder}/src/*.cpp",
-				"${workspaceFolder}/src/glad.c",
+				"${workspaceFolder}/vendor/glad.c",
 				"-lglfw3dll",
 				"-o",
 				"${workspaceFolder}/bin/main.exe"
