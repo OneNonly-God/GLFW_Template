@@ -22,14 +22,6 @@ void checkShaderCompilation(unsigned int shader, const std::string& type) {
     }
 }
 
-
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_Z && action == GLFW_PRESS){
-        std::cout << "Z key was pressed" << std::endl;
-    }
-}
-
 // Utility function to check program linking errors
 void checkProgramLinking(unsigned int program) {
     int success;
@@ -135,12 +127,13 @@ int main() {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    
+    std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
     float r = 23.0f, g = 0.5f, b = 34.0f, a = 1.0f;
 
     // Main loop
     while (!glfwWindowShouldClose(window)) {
         // Clear the screen with a color
+        glfwPollEvents();
         glClearColor(r, g, b, a);
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -148,18 +141,15 @@ int main() {
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        glfwSetKeyCallback(window, key_callback);
 
         // Swap buffers and poll events
         glfwSwapBuffers(window);
-        glfwPollEvents();
     }
 
     // Cleanup OpenGL resources
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteProgram(shaderProgram);
-
     // Terminate GLFW
     glfwTerminate();
     return 0;
